@@ -1,3 +1,52 @@
+/* ==========================================================
+   Laboratório Interativo de Algoritmos de Ordenação
+   Disciplina: Estrutura de Dados
+
+   Este arquivo tem duas partes:
+   1) LÓGICA PURA (sem DOM): leitura da entrada e algoritmos.
+   2) INTERFACE: lê o formulário e mostra os resultados.
+
+   Os algoritmos NÃO usam Array.prototype.sort().
+   ========================================================== */
+
+/* ----------------------------------------------------------
+   PARTE 1: LÓGICA
+   ---------------------------------------------------------- */
+
+/**
+ * Converte o texto digitado em um vetor de números.
+ * Aceita separação por vírgulas e/ou espaços.
+ * Retorna { ok: true, numeros } ou { ok: false, erro }.
+ */
+function parseEntrada(texto) {
+    const bruto = String(texto == null ? "" : texto).trim();
+
+    if (bruto === "") {
+        return { ok: false, vazio: true, erro: "Digite ao menos um número para ordenar." };
+    }
+
+    // Separa por qualquer combinação de vírgulas e espaços em branco
+    const partes = bruto.split(/[,\s]+/).filter((p) => p !== "");
+
+    if (partes.length === 0) {
+        return { ok: false, vazio: true, erro: "Digite ao menos um número para ordenar." };
+    }
+
+    const numeros = [];
+    for (const parte of partes) {
+        // Aceita inteiros e decimais com ponto, com sinal opcional: -5, +3, 2.5
+        if (!/^[-+]?\d+(\.\d+)?$/.test(parte)) {
+            return {
+                ok: false,
+                erro: 'Valor inválido: "' + parte + '". Use apenas números separados por vírgula ou espaço (decimais com ponto).',
+            };
+        }
+        numeros.push(Number(parte));
+    }
+
+    return { ok: true, numeros };
+}
+
 /**
  * Decide se "a" deve vir DEPOIS de "b" na ordem escolhida.
  * Crescente: a vem depois de b quando a > b.
