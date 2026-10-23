@@ -66,3 +66,50 @@ function bubbleSort(entrada, crescente = true) {
 
     return reg;
 }
+
+/* ---------------- INSERTION SORT ----------------
+   Mantém uma sublista ordenada à esquerda. Pega o próximo
+   elemento ("chave") e desloca para a direita os que vêm
+   depois dele, até achar o lugar certo da chave.
+   ------------------------------------------------ */
+function insertionSort(entrada, crescente = true) {
+    const v = entrada.slice();
+    const reg = novoRegistro(v);
+    const n = v.length;
+
+    for (let i = 1; i < n; i++) {
+        const chave = v[i];
+        let j = i - 1;
+
+        // Enquanto o elemento à esquerda vier depois da chave, desloca
+        while (j >= 0) {
+            reg.comparacoes++;
+            const desloca = veioDepois(v[j], chave, crescente);
+            reg.passos.push({
+                tipo: "comparar",
+                texto: "Compara a chave " + chave + " com " + v[j] + " (pos. " + j + ")" + (desloca ? ": desloca " + v[j] + " para a direita." : ": achou o lugar da chave."),
+                indices: [j, j + 1],
+                vetor: v.slice(),
+            });
+
+            if (!desloca) break;
+
+            v[j + 1] = v[j]; // deslocamento
+            reg.trocas++;
+            j--;
+        }
+
+        // Só registra a inserção se a chave mudou de posição
+        if (j + 1 !== i) {
+            v[j + 1] = chave;
+            reg.passos.push({
+                tipo: "inserir",
+                texto: "Insere a chave " + chave + " na posição " + (j + 1) + ".",
+                indices: [j + 1],
+                vetor: v.slice(),
+            });
+        }
+    }
+
+    return reg;
+}
