@@ -1,0 +1,56 @@
+
+Bubble Sort
+  ok   Sequência comum: 5, 2, 8, 1 -> 1, 2, 5, 8
+  ok   Sequência comum: não altera o vetor original
+  ok   Valores repetidos: 4, 2, 4, 1 -> 1, 2, 4, 4
+  ok   Valores repetidos: não altera o vetor original
+  ok   Valores negativos: 3, -5, 0, -1 -> -5, -1, 0, 3
+  ok   Valores negativos: não altera o vetor original
+  ok   Um elemento: 7 -> 7
+  ok   Um elemento: não altera o vetor original
+  ok   Sequência vazia: mensagem adequada
+  ok   Entrada inválida: mensagem de erro compreensível
+  ok   Ordem decrescente: 1, 5, 3 -> 5, 3, 1
+  ok   Ordem decrescente: não altera o vetor original
+  ok   300 vetores aleatórios (com repetidos e negativos) batem com o gabarito
+
+Selection Sort
+  ok   Sequência comum: 5, 2, 8, 1 -> 1, 2, 5, 8
+  ok   Sequência comum: não altera o vetor original
+  ok   Valores repetidos: 4, 2, 4, 1 -> 1, 2, 4, 4
+  ok   Valores repetidos: não altera o vetor original
+  ok   Valores negativos: 3, -5, 0, -1 -> -5, -1, 0, 3
+  ok   Valores negativos: não altera o vetor original
+  ok   Um elemento: 7 -> 7
+  ok   Um elemento: não altera o vetor original
+  ok   Sequência vazia: mensagem adequada
+  ok   Entrada inválida: mensagem de erro compreensível
+  ok   Ordem decrescente: 1, 5, 3 -> 5, 3, 1
+  ok   Ordem decrescente: não altera o vetor original
+  ok   300 vetores aleatórios (com repetidos e negativos) batem com o gabarito
+
+Insertion Sort
+  ok   Sequência comum: 5, 2, 8, 1 -> 1, 2, 5, 8
+  ok   Sequência comum: não altera o vetor original
+  ok   Valores repetidos: 4, 2, 4, 1 -> 1, 2, 4, 4
+  ok   Valores repetidos: não altera o vetor original
+  ok   Valores negativos: 3, -5, 0, -1 -> -5, -1, 0, 3
+  ok   Valores negativos: não altera o vetor original
+  ok   Um elemento: 7 -> 7
+  ok   Um elemento: não altera o vetor original
+  ok   Sequência vazia: mensagem adequada
+  ok   Entrada inválida: mensagem de erro compreensível
+  ok   Ordem decrescente: 1, 5, 3 -> 5, 3, 1
+  ok   Ordem decrescente: não altera o vetor original
+  ok   300 vetores aleatórios (com repetidos e negativos) batem com o gabarito
+
+Leitura da entrada
+  ok   aceita espaços
+  ok   aceita vírgulas sem espaço
+  ok   aceita mistura de vírgulas e espaços
+  ok   aceita decimais com ponto
+  ok   rejeita texto sem números (apenas espaços)
+  ok   rejeita '1..2'
+  ok   rejeita '12abc'
+
+46/46 verificações passaram.
