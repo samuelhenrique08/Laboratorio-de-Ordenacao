@@ -155,3 +155,15 @@ function insertionSort(entrada, crescente = true) {
 
     return reg;
 }
+
+/** Tabela de algoritmos disponíveis (usada pelo seletor e pelos testes). */
+const ALGORITMOS = {
+    bubble: { nome: "Bubble Sort", funcao: bubbleSort, medeTrocas: "trocas" },
+    selection: { nome: "Selection Sort", funcao: selectionSort, medeTrocas: "trocas" },
+    insertion: { nome: "Insertion Sort", funcao: insertionSort, medeTrocas: "deslocamentos" },
+};
+
+/* Exporta para os testes em Node (no navegador isso é ignorado) */
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = { parseEntrada, bubbleSort, selectionSort, insertionSort, ALGORITMOS };
+}
