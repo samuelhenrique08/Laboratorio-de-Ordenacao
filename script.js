@@ -216,3 +216,124 @@ const ALGORITMOS = {
 if (typeof module !== "undefined" && module.exports) {
     module.exports = { parseEntrada, bubbleSort, selectionSort, insertionSort, ALGORITMOS };
 }
+
+/* ----------------------------------------------------------
+   PARTE 2: INTERFACE (só roda no navegador)
+   ---------------------------------------------------------- */
+if (typeof document !== "undefined") {
+    const MAX_PASSOS_NA_TELA = 500;
+
+    const form = document.getElementById("formulario");
+    const campoEntrada = document.getElementById("entrada");
+    const campoAlgoritmo = document.getElementById("algoritmo");
+    const campoErro = document.getElementById("erro");
+    const areaResultado = document.getElementById("resultado");
+    const saidaOriginal = document.getElementById("saida-original");
+    const saidaOrdenada = document.getElementById("saida-ordenada");
+    const rotuloOrdenada = document.getElementById("rotulo-ordenada");
+    const resumo = document.getElementById("resumo");
+    const listaPassos = document.getElementById("passos");
+    const avisoPassos = document.getElementById("aviso-passos");
+    const botaoLimpar = document.getElementById("limpar");
+
+    function mostrarErro(mensagem) {
+        campoErro.textContent = mensagem;
+        campoErro.hidden = false;
+        areaResultado.hidden = true;
+    }
+
+    function esconderErro() {
+        campoErro.textContent = "";
+        campoErro.hidden = true;
+    }
+
+    /** Monta a representação visual de um vetor (cada número em uma "pílula"). */
+    function desenharVetor(vetor, indicesDestaque, tipo) {
+        const frag = document.createDocumentFragment();
+        vetor.forEach((valor, pos) => {
+            const el = document.createElement("span");
+            el.className = "num";
+            if (indicesDestaque && indicesDestaque.indexOf(pos) !== -1) {
+                el.classList.add("destaque-" + tipo);
+            }
+            el.textContent = valor;
+            frag.appendChild(el);
+        });
+        return frag;
+    }
+
+    function mostrarPassos(passos) {
+        listaPassos.innerHTML = "";
+        avisoPassos.hidden = true;
+
+        if (passos.length === 0) {
+            const li = document.createElement("li");
+            li.className = "passo";
+            li.textContent = "Nenhum passo foi necessário: com um único elemento o vetor já está ordenado.";
+            listaPassos.appendChild(li);
+            return;
+        }
+
+        const visiveis = passos.slice(0, MAX_PASSOS_NA_TELA);
+        visiveis.forEach((passo) => {
+            const li = document.createElement("li");
+            li.className = "passo passo-" + passo.tipo;
+
+            const texto = document.createElement("p");
+            texto.className = "passo-texto";
+            texto.textContent = passo.texto;
+
+            const vetor = document.createElement("div");
+            vetor.className = "vetor";
+            vetor.appendChild(desenharVetor(passo.vetor, passo.indices, passo.tipo));
+
+            li.appendChild(texto);
+            li.appendChild(vetor);
+            listaPassos.appendChild(li);
+        });
+
+        if (passos.length > MAX_PASSOS_NA_TELA) {
+            avisoPassos.textContent = "Mostrando os primeiros " + MAX_PASSOS_NA_TELA + " de " + passos.length + " passos.";
+            avisoPassos.hidden = false;
+        }
+    }
+
+    function ordenar(evento) {
+        evento.preventDefault(); // evita recarregar a página
+        esconderErro();
+
+        const leitura = parseEntrada(campoEntrada.value);
+        if (!leitura.ok) {
+            mostrarErro(leitura.erro);
+            return;
+        }
+
+        const sentido = form.elements["sentido"].value; // "crescente" ou "decrescente"
+        const crescente = sentido === "crescente";
+        const algoritmo = ALGORITMOS[campoAlgoritmo.value];
+        const reg = algoritmo.funcao(leitura.numeros, crescente);
+
+        saidaOriginal.innerHTML = "";
+        saidaOriginal.appendChild(desenharVetor(leitura.numeros));
+        saidaOrdenada.innerHTML = "";
+        saidaOrdenada.appendChild(desenharVetor(reg.resultado));
+        rotuloOrdenada.textContent = "Ordenada (" + sentido + ")";
+
+        resumo.textContent =
+            algoritmo.nome + " · " + leitura.numeros.length + " elemento(s) · " +
+            reg.comparacoes + " comparações · " + reg.trocas + " " + algoritmo.medeTrocas;
+
+        mostrarPassos(reg.passos);
+        areaResultado.hidden = false;
+    }
+
+    function limpar() {
+        form.reset();
+        esconderErro();
+        areaResultado.hidden = true;
+        campoEntrada.focus();
+    }
+
+    form.addEventListener("submit", ordenar);
+    botaoLimpar.addEventListener("click", limpar);
+}
