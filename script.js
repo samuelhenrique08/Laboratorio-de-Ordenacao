@@ -67,6 +67,48 @@ function bubbleSort(entrada, crescente = true) {
     return reg;
 }
 
+/* ---------------- SELECTION SORT ----------------
+   A cada passagem, procura o menor (ou maior) elemento da
+   parte não ordenada e o leva para a posição "i".
+   ------------------------------------------------ */
+function selectionSort(entrada, crescente = true) {
+    const v = entrada.slice();
+    const reg = novoRegistro(v);
+    const n = v.length;
+
+    for (let i = 0; i < n - 1; i++) {
+        let alvo = i; // posição do menor (ou maior) encontrado até agora
+
+        for (let j = i + 1; j < n; j++) {
+            reg.comparacoes++;
+            // v[alvo] vem depois de v[j]? Então v[j] é melhor candidato.
+            const melhor = veioDepois(v[alvo], v[j], crescente);
+            reg.passos.push({
+                tipo: "comparar",
+                texto: "Compara " + v[j] + " (pos. " + j + ") com o candidato " + v[alvo] + " (pos. " + alvo + ")" + (melhor ? ": novo candidato." : ": mantém o candidato."),
+                indices: [alvo, j],
+                vetor: v.slice(),
+            });
+            if (melhor) alvo = j;
+        }
+
+        if (alvo !== i) {
+            const aux = v[i];
+            v[i] = v[alvo];
+            v[alvo] = aux;
+            reg.trocas++;
+            reg.passos.push({
+                tipo: "trocar",
+                texto: "Troca a posição " + i + " com a posição " + alvo + " (leva " + v[i] + " para o lugar certo).",
+                indices: [i, alvo],
+                vetor: v.slice(),
+            });
+        }
+    }
+
+    return reg;
+}
+
 /* ---------------- INSERTION SORT ----------------
    Mantém uma sublista ordenada à esquerda. Pega o próximo
    elemento ("chave") e desloca para a direita os que vêm
