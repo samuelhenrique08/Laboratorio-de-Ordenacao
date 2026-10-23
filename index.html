@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Laboratório Interativo de Algoritmos de Ordenação</title>
+    <meta name="description"
+        content="Veja passo a passo como Bubble, Selection e Insertion Sort ordenam uma sequência de números.">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="topo">
+        <p class="etiqueta">Estrutura de Dados · Trabalho integrador</p>
+        <h1>Laboratório de <span class="realce">Algoritmos</span> de Ordenação</h1>
+        <p class="subtitulo">Informe uma sequência de números, escolha o algoritmo e acompanhe cada comparação e troca
+            até o resultado final.</p>
+    </header>
+
+    <main>
+        <section class="cartao" aria-labelledby="titulo-entrada">
+            <h2 id="titulo-entrada">1. Configure a ordenação</h2>
+
+            <form id="formulario" novalidate>
+                <div class="campo">
+                    <label for="entrada">Números (separados por vírgula ou espaço)</label>
+                    <input type="text" id="entrada" name="entrada" placeholder="Ex.: 5, 2, 8, -1, 2, 0"
+                        autocomplete="off" inputmode="text">
+                    <small>Aceita negativos, repetidos e decimais com ponto (ex.: 2.5).</small>
+                </div>
+
+                <fieldset class="campo">
+                    <legend>Ordem</legend>
+                    <div class="opcoes">
+                        <label class="opcao"><input type="radio" name="sentido" value="crescente" checked>
+                            Crescente</label>
+                        <label class="opcao"><input type="radio" name="sentido" value="decrescente"> Decrescente</label>
+                    </div>
+                </fieldset>
+
+                <div class="campo">
+                    <label for="algoritmo">Algoritmo</label>
+                    <select id="algoritmo" name="algoritmo">
+                        <option value="bubble">Bubble Sort</option>
+                        <option value="selection">Selection Sort</option>
+                        <option value="insertion">Insertion Sort</option>
+                    </select>
+                </div>
+
+                <div class="acoes">
+                    <button type="submit" class="botao">Ordenar</button>
+                    <button type="button" id="limpar" class="botao botao-secundario">Limpar</button>
+                </div>
+
+                <p id="erro" class="erro" role="alert" hidden></p>
+            </form>
+        </section>
+
+        <section id="resultado" class="cartao" aria-labelledby="titulo-resultado" aria-live="polite" hidden>
+            <h2 id="titulo-resultado">2. Resultado</h2>
+            <p id="resumo" class="resumo"></p>
+
+            <div class="lado-a-lado">
+                <div class="coluna">
+                    <h3>Original</h3>
+                    <div id="saida-original" class="vetor"></div>
+                </div>
+                <div class="coluna">
+                    <h3 id="rotulo-ordenada">Ordenada</h3>
+                    <div id="saida-ordenada" class="vetor vetor-final"></div>
+                </div>
+            </div>
+
+            <h2 class="subsecao">3. Passo a passo</h2>
+            <p class="legenda">
+                <span class="chip chip-comparar">comparação</span>
+                <span class="chip chip-trocar">troca</span>
+                <span class="chip chip-inserir">inserção</span>
+            </p>
+            <p id="aviso-passos" class="aviso" hidden></p>
+            <ol id="passos" class="lista-passos"></ol>
+        </section>
+    </main>
+
+    <footer class="rodape">
+        <p>Projeto acadêmico · HTML, CSS e JavaScript puro · Algoritmos escritos sem <code>Array.sort()</code></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
