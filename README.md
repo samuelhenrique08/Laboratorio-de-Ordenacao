@@ -7,7 +7,7 @@ Trabalho integrador da disciplina de **Estrutura de Dados** · Curso Técnico em
 
 ## 1. Integrantes, objetivo e problema que resolve
 
-**Integrantes:** _Samuel Henrique, Pedro Lucas, Anthony Gabriel, Victor Gabriel_ (preencher)
+**Integrantes:** _Samuel Henrique, Pedro Lucas, Anthony Gabriel, Victor Gabriel_
 
 **Objetivo:** site em que qualquer pessoa informa uma sequência de números, escolhe a ordem (crescente ou decrescente) e o algoritmo, e acompanha o passo a passo da ordenação.
 
